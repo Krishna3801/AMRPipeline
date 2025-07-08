@@ -1,0 +1,25 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- main
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- task: AzureResourceManagerTemplateDeployment@3
+  inputs:
+    deploymentScope: 'Resource Group'
+    azureResourceManagerConnection: 'ARMPipeline-Conn'
+    subscriptionId: 'ac9b875b-fab7-4320-9c59-3939a1b8abc2'
+    action: 'Create Or Update Resource Group'
+    resourceGroupName: 'ARMPipeline'
+    location: 'indi'
+    templateLocation: 'URL of the file'
+    csmFileLink: 'https://raw.githubusercontent.com/Krishna3801/AMRPipeline/refs/heads/main/create_web_app/linkedStorageAccount.json'
+    overrideParameters: 'ARMPipeline'
+    deploymentMode: 'Incremental'
+    deploymentName: 'ARMPipelineDeployment'
