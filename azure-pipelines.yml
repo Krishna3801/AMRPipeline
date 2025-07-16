@@ -7,6 +7,16 @@ trigger:
 - main
 
 pool:
+- task: AzureResourceManagerTemplateDeployment@3
+  inputs:
+    deploymentScope: 'Resource Group'
+    azureResourceManagerConnection: 'ARMPipeline-conn'
+    subscriptionId: 'ac9b875b-fab7-4320-9c59-3939a1b8abc2'
+    action: 'Create Or Update Resource Group'
+    resourceGroupName: 'ARMPipeline'
+    location: 'Central India'
+    templateLocation: 'Linked artifact'
+    deploymentMode: 'Incremental'
   vmImage: ubuntu-latest
 
 steps:
